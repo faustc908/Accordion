@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './app.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const styles = {
+    active: {
+        display: 'inherit'
+    },
+    inactive: {
+        display: 'none'
+    }
 }
+
+class App extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+        active: false
+         };
+         this.toggle = this.toggle.bind(this);
+      }
+
+   toggle(){
+       this.setState = ({
+           active: !this.state.active
+       });
+   }
+    
+    render(){
+
+        const stateStyle = this.state.active ? styles.active : styles.inactive;
+
+        return (
+            
+<section>
+    <a onClick = {this.toggle}>
+    {this.props.summary}
+    </a>
+    <p style = {stateStyle}>
+    {this.props.details}
+    </p>
+</section>
+        );
+    }
+}
+
+App.propTypes = {
+    summary: React.PropTypes.string.isRequired,
+    details: React.PropTypes.string.isRequired
+};
 
 export default App;
